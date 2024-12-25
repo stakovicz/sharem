@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'home.title'|trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="sticky top-0 flex-row items-center justify-center py-2 m-auto w-full max-w-[1024px] dark:bg-slate-800">
+        <h1 class="py-2 text-xl dark:text-slate-100">{{ block('title') }}</h1>
+        {{ form_start(form) }}
+            <div class="flex w-full py-2">
+                {{ form_label(form.query, null, {label_attr: {class: 'sr-only', }}) }}
+                {{ form_widget(form.query, {attr: {class: 'mr-2 p-2 w-full rounded border-2 border-slate-400', autofocus:true}}) }}
+                {{ form_widget(form.submit, {attr: {class: 'mx-2 bg-slate-200 rounded border-2 border-slate-400 leading-4 hover:opacity-70'}}) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    {% if results %}
+    <div class="mx-auto w-full max-w-[1024px]">
+        <ul>
+            {% for result in results %}
+                <li class="my-2 mr-4">
+                    <div class="flex rounded p-2 dark:bg-slate-700">
+                        <img class="mr-2 aspect-1 max-w-48 rounded" src="{{ result.thumbnail }}" alt="" />
+                        <div class="w-full flex flex-col">
+                            <div class="text-xl dark:text-slate-200 font-bold">{{ result.title }}</div>
+                            <div class="text-lg dark:text-slate-400">{{ result.album }}</div>
+                            <div class="text-sm dark:text-slate-200 font-bold">{{ 'search_result.artist'|trans({'{artist}': result.artist}) }}</div>
+                            <a href="{{ path('app_create', {hash: result.hash}) }}"
+                               class="block p-2 mt-auto rounded dark:bg-slate-300 dark:text-slate-800 hover:opacity-70">
+                                {{ ('search_result.'~result.type~'.share')|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elseif app.request.query.has('query') %}
+    <div class="mx-auto w-full max-w-[1024px] dark:text-slate-200">
+        {{ 'home.no_results'|trans }}
+    </div>
+    {% endif %}
+
+{% endblock %}

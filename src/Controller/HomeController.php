@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\MusicMatcher\Searcher;
+use App\Music\Search\UrlSearcher;
+use App\Music\Search\Searcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,11 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(Request $request, Searcher $repository): Response
+    public function index(Request $request, Searcher $searcher, UrlSearcher $urlSearcher): Response
     {
         $query = (string) $request->query->get('query');
         if ($query) {
-            $results = $repository->search($query);
+            $results = $searcher->search($query);
         }
 
         $form = $this->searchForm($query);
@@ -26,10 +27,16 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
+            if (filter_var($data['query'], FILTER_VALIDATE_URL)) {
+                if ($search = $urlSearcher->url($data['query'])) {
+
+                    return $this->redirectToRoute('app_create', ['hash' => $search->hash]);
+                }
+            }
             return $this->redirectToRoute('app_home', ['query' => $data['query']]);
         }
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home.html.twig', [
             'form' => $form->createView(),
             'results' => $results ?? [],
         ]);
@@ -39,13 +46,13 @@ class HomeController extends AbstractController
     {
         return $this->createFormBuilder()
             ->add('query', TextType::class, [
-                'label' => 'Search label',
-                'attr' => ['placeholder' => 'Search placeholder'],
-                'data' => $query,
+                'label' => 'search.query.label',
+                'attr' => ['placeholder' => 'search.query.placeholder'],
                 'label_attr' => ['class' => 'visually-hidden'],
+                'data' => $query,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => '🔎',
+                'label' => 'search.submit',
             ])
             ->getForm();
     }

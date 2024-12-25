@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="yucL30i" resname="footer.home">
+        <source>footer.home</source>
+        <target>Accueil</target>
+      </trans-unit>
+        <trans-unit id="2DMSekh" resname="share.track.title">
+            <source>share.track.title</source>
+            <target>{title} - {album} par {artist}</target>
+        </trans-unit>
+        <trans-unit id="ekh2DMS" resname="share.album.title">
+            <source>share.album.title</source>
+            <target>{album} par {artist}</target>
+        </trans-unit>
+      <trans-unit id="LBBvQZY" resname="home.title">
+        <source>home.title</source>
+        <target>Partagez la musique pour la faire vivre</target>
+      </trans-unit>
+        <trans-unit id="RH0iwv0" resname="search_result.track.share">
+            <source>search_result.track.share</source>
+            <target>Partager ce tiiiiiiitre !</target>
+        </trans-unit>
+        <trans-unit id="wv0RH0i" resname="search_result.album.share">
+            <source>search_result.album.share</source>
+            <target>Partager cet albuuuuuuum !</target>
+        </trans-unit>
+      <trans-unit id="8DpZdho" resname="home.no_results">
+        <source>home.no_results</source>
+        <target>Aucun résultat pour cette recherche... ;-(</target>
+      </trans-unit>
+        <trans-unit id="0">
+            <source>share.open</source>
+            <target>Ouvrir dans {provider}</target>
+        </trans-unit>
+        <trans-unit id="1">
+            <source>search_result.artist</source>
+            <target>par {artist}</target>
+        </trans-unit>
+        <trans-unit id="2">
+            <source>search.query.label</source>
+            <target>Rechercher</target>
+        </trans-unit>
+        <trans-unit id="3">
+            <source>search.query.placeholder</source>
+            <target>Titre, album, URL Deezer, URL Spotify…</target>
+        </trans-unit>
+        <trans-unit id="4">
+            <source>search.submit</source>
+            <target>Lancer la recherche</target>
+        </trans-unit>
+        <trans-unit id="5">
+            <source>share.copy_share</source>
+            <target>Copier l'URL du partage</target>
+        </trans-unit>
+        <trans-unit id="6">
+            <source>share.copied</source>
+            <target>Copié !</target>
+        </trans-unit>
+        <trans-unit id="7">
+            <source>footer.dark_theme</source>
+            <target>Thème sombre</target>
+        </trans-unit>
+        <trans-unit id="8">
+            <source>footer.light_theme</source>
+            <target>Thème clair</target>
+        </trans-unit>
+        <trans-unit id="9">
+            <source>footer.change_theme</source>
+            <target>Thème automatique</target>
+        </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,5 +1,5 @@
-
 .twigstan
+public/thumbnails/*
 
 ###> symfony/framework-bundle ###
 /.env.local
