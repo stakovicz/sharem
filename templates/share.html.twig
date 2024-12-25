@@ -10,16 +10,16 @@
         <div class="flex">
             <div class="max-w-60">
                 <img src="{{ path('app_thumbnail', {id: share.id}) }}" class="h-60 rounded" alt=""/>
-                <div class="my-2 text-xl dark:text-slate-200 font-bold leading-5">{{ share.title }}</div>
-                <div class="my-2 text-lg dark:text-slate-400 leading-5">{{ share.album }}</div>
-                <div class="my-2 text-sm dark:text-slate-200 font-bold">{{ 'search_result.artist'|trans({'{artist}': share.artist}) }}</div>
+                <div class="my-2 text-xl dark:text-stone-200 font-bold leading-5">{{ share.title }}</div>
+                <div class="my-2 text-lg dark:text-stone-400 leading-5">{{ share.album }}</div>
+                <div class="my-2 text-sm dark:text-stone-200 font-bold">{{ 'search_result.artist'|trans({'{artist}': share.artist}) }}</div>
             </div>
             <div class="px-2">
                 <ul class="flex">
                     {% for match in share.matches %}
                         <li>
                             <a href="{{ match.url }}" target="_blank"
-                               class="m-2 flex flex-col items-center dark:text-slate-200 hover:opacity-70"
+                               class="m-2 flex flex-col items-center dark:text-stone-200 hover:opacity-70"
                                title="{{ 'share.open'|trans({'{provider}': match.provider}) }}">
                                 <img class="w-16 h-16 p-2" src="{{ asset('images/'~(match.provider|lower)~'.svg') }}"
                                      alt=""/>
@@ -32,7 +32,7 @@
         </div>
 
         <div {{ stimulus_controller('share') }}>
-            <button class="flex items-center dark:text-slate-200 hover:opacity-70"
+            <button class="flex items-center dark:text-stone-200 hover:opacity-70"
                     title="{{ 'share.copy_share'|trans }}"
                     {{ stimulus_action('share', 'copy', 'click') }}
                     {{ stimulus_target('share', 'url') }}
