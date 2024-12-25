@@ -11,9 +11,10 @@
                 {{ form_label(form.query, null, {label_attr: {class: 'sr-only', }}) }}
                 {{ form_widget(form.query, {attr: {class: 'p-2 w-full', autofocus:true}}) }}
                 {{ form_widget(form.submit, {attr: {class: 'p-2 border-l-2 border-stone-900 text-sm leading-3 bg-stone-200 dark:border-stone-400 hover:opacity-70'}}) }}
-                <button type="button" name="form[clear]" title="{{ 'search.clear.title'|trans }}"
-                        class="p-2 border-l-2 border-stone-900 text-sm leading-3 bg-stone-200  dark:border-stone-400 hover:opacity-70"
-                >{{ ux_icon('mdi:clear', {class:"w-4 h-4"}) }}</button>
+                <a title="{{ 'search.clear.title'|trans }}"
+                    class="p-2 border-l-2 border-stone-900 text-sm leading-3 bg-stone-200  dark:border-stone-400 hover:opacity-70"
+                    href="{{ path('app_home') }}"
+                >{{ ux_icon('mdi:clear', {class:"w-4 h-4 m-1"}) }}</a>
             </div>
         {{ form_end(form) }}
     </div>
