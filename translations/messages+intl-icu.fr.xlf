@@ -51,7 +51,15 @@
         </trans-unit>
         <trans-unit id="4">
             <source>search.submit</source>
-            <target>Lancer la recherche</target>
+            <target>Rechercher</target>
+        </trans-unit>
+        <trans-unit id="12">
+            <source>search.clear</source>
+            <target>Vider</target>
+        </trans-unit>
+        <trans-unit id="1D2">
+            <source>search.clear.title</source>
+            <target>Vider la recherche</target>
         </trans-unit>
         <trans-unit id="5">
             <source>share.copy_share</source>

@@ -6,7 +6,6 @@ use App\Music\Match\MusicMatchInterface;
 use App\Music\Match\MusicMusicMatch;
 use App\Music\Search\MusicSearch;
 use App\Music\Search\SearchResult;
-use Symfony\Component\HttpClient\Exception\RedirectionException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Deezer implements MusicProviderInterface
@@ -52,10 +51,10 @@ class Deezer implements MusicProviderInterface
         $regexp = '#https://www\.deezer\.com/(.+/)?(track|album)/([0-9]+)$#';
 
         if (preg_match($regexp, $url, $matches)) {
-
             $request = $this->httpClient->request('GET', sprintf('%s/%s/%d', self::API_URL, $matches[2], $matches[3]));
 
             $search = new SearchResult($request->toArray());
+
             return new MusicSearch($search);
         }
 
@@ -65,6 +64,10 @@ class Deezer implements MusicProviderInterface
     private static function removeQS(string $url): string
     {
         $parts = parse_url($url);
+        if (!isset($parts['scheme'], $parts['host'], $parts['path'])) {
+            return $url;
+        }
+
         return $parts['scheme'].'://'.$parts['host'].$parts['path'];
     }
 }

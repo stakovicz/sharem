@@ -2,8 +2,6 @@
 
 namespace App\Music\Search;
 
-use JsonException;
-
 final class MusicSearch
 {
     public string $type = '';
@@ -36,7 +34,7 @@ final class MusicSearch
     {
         try {
             $this->hash = base64_encode(json_encode($this, JSON_THROW_ON_ERROR));
-        } catch (JsonException $exception) {
+        } catch (\JsonException $exception) {
             throw new SearchException('Error encoding hash: '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }
@@ -48,7 +46,7 @@ final class MusicSearch
     {
         try {
             return json_decode(base64_decode($hash), false, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $exception) {
+        } catch (\JsonException $exception) {
             throw new SearchException('Error decoding hash: '.$exception->getMessage(), $exception->getCode(), $exception);
         }
     }

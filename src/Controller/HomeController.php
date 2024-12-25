@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Music\Search\UrlSearcher;
 use App\Music\Search\Searcher;
+use App\Music\Search\UrlSearcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,10 +29,10 @@ class HomeController extends AbstractController
 
             if (filter_var($data['query'], FILTER_VALIDATE_URL)) {
                 if ($search = $urlSearcher->url($data['query'])) {
-
                     return $this->redirectToRoute('app_create', ['hash' => $search->hash]);
                 }
             }
+
             return $this->redirectToRoute('app_home', ['query' => $data['query']]);
         }
 

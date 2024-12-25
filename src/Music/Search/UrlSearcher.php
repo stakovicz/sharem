@@ -3,7 +3,6 @@
 namespace App\Music\Search;
 
 use App\Music\Provider\MusicProviderInterface;
-use App\Music\Search\MusicSearch;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 readonly class UrlSearcher

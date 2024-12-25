@@ -6,19 +6,20 @@ use App\Music\Provider\Deezer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DeezerTest extends TestCase
 {
-    readonly private Deezer $deezer;
-    readonly private MockHttpClient $httpClient;
+    private readonly Deezer $deezer;
+    private readonly MockHttpClient $httpClient;
+
     protected function setUp(): void
     {
         $this->httpClient = new MockHttpClient();
         $this->deezer = new Deezer($this->httpClient);
     }
 
-    private function badURLs():array{
+    private function badURLs(): array
+    {
         return [
             'empty' => [''],
             'deezer bad URL' => ['https://www.deezer.com/bad_url'],
@@ -29,14 +30,15 @@ class DeezerTest extends TestCase
     /**
      * @dataProvider badURLs
      */
-    public function testBadUrls($url): void
+    public function testBadUrls(string $url): void
     {
         $actual = $this->deezer->url($url);
 
         self::assertNull($actual);
     }
 
-    private function urls():array{
+    private function urls(): array
+    {
         return [
             'deezer track URL' => ['https://www.deezer.com/us/track/69838319', 'track', 69838319],
             'deezer track URL with query string' => ['https://www.deezer.com/us/track/69838319?host=7544282&utm_campaign=clipboard-generic&utm_source=user_sharing&utm_content=album-596777432&deferredFl=1', 'track', 69838319],
@@ -46,29 +48,28 @@ class DeezerTest extends TestCase
             'deezer share album URL' => ['https://deezer.page.link/jVqRCZQjj62xwGGR6', 'album', 596777432],
         ];
     }
+
     /** @dataProvider urls */
-    public function testURLs($url, $type, $id): void
+    public function testURLs(string $url, string $type, int $id): void
     {
         $this->httpClient->setResponseFactory(function ($method, $url, $options) use ($type, $id): MockResponse {
-
             if (str_contains($url, 'https://deezer.page.link')) {
-
-                return new MockResponse(json_encode([]), [
+                return new MockResponse(info: [
                     'http_code' => 302,
                     'response_headers' => [
                         'location' => "https://www.deezer.com/$type/$id",
-                    ]
+                    ],
                 ]);
             }
 
             $this->assertSame('GET', $method);
             $this->assertSame("https://api.deezer.com/$type/$id", $url);
 
-            return new MockResponse(json_encode([
+            return new MockResponse((string) json_encode([
                 'title' => "$type $id",
                 'link' => "https://www.deezer.com/XXXXX/$id",
                 'type' => $type,
-                'album' => ['cover_medium' => "https://www.deezer.com/XXXXX/$id.jpg", 'title' => "album XXX"],
+                'album' => ['cover_medium' => "https://www.deezer.com/XXXXX/$id.jpg", 'title' => 'album XXX'],
                 'artist' => ['name' => 'The artist'],
             ]));
         });

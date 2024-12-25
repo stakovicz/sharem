@@ -3,16 +3,16 @@
 {% block title %}{{ ('share.'~share.type.value~'.title')|trans({'{title}': share.title, '{album}': share.album, '{artist}': share.artist}) }}{% endblock %}
 
 {% block body %}
-    <div class="flex-row items-center justify-center text-slate-200 py-2 m-auto w-[640px]">
+    <div class="flex-row items-center justify-center py-2 m-auto w-[640px]">
 
         <h1 class="sr-only">{{ block('title') }}</h1>
 
         <div class="flex">
             <div class="max-w-60">
-                <img src="{{ path('app_thumbnail', {id: share.id}) }}" class="h-60" alt=""/>
+                <img src="{{ path('app_thumbnail', {id: share.id}) }}" class="h-60 rounded" alt=""/>
                 <div class="my-2 text-xl dark:text-slate-200 font-bold leading-5">{{ share.title }}</div>
                 <div class="my-2 text-lg dark:text-slate-400 leading-5">{{ share.album }}</div>
-                <div class="my-2 text-sm dark:text-slate-200 font-bold leading-5">{{ share.artist }}</div>
+                <div class="my-2 text-sm dark:text-slate-200 font-bold">{{ 'search_result.artist'|trans({'{artist}': share.artist}) }}</div>
             </div>
             <div class="px-2">
                 <ul class="flex">
@@ -31,10 +31,8 @@
             </div>
         </div>
 
-
         <div {{ stimulus_controller('share') }}>
-
-            <button class="flex items-center hover:opacity-70"
+            <button class="flex items-center dark:text-slate-200 hover:opacity-70"
                     title="{{ 'share.copy_share'|trans }}"
                     {{ stimulus_action('share', 'copy', 'click') }}
                     {{ stimulus_target('share', 'url') }}
@@ -44,7 +42,7 @@
                     <span>
                         {{ url('app_share', {id: share.id}) }}
                     </span>
-                    <span data-share-target="icon">{{ ux_icon('fa6-regular:copy', {class:"w-4 h-4 m-2"}) }}</span>
+                    <span data-share-target="icon">{{ ux_icon('mdi:content-copy', {class:"w-4 h-4 m-2"}) }}</span>
             </button>
         </div>
     </div>

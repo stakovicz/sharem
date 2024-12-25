@@ -10,5 +10,6 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 interface MusicProviderInterface
 {
     public function match(MusicSearch $search): ?MusicMatchInterface;
+
     public function url(string $url): ?MusicSearch;
 }
