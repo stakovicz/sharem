@@ -19,7 +19,7 @@
                     {% for match in share.matches %}
                         <li>
                             <a href="{{ match.url }}" target="_blank"
-                               class="m-2 flex flex-col items-center hover:opacity-70"
+                               class="m-2 flex flex-col items-center dark:text-slate-200 hover:opacity-70"
                                title="{{ 'share.open'|trans({'{provider}': match.provider}) }}">
                                 <img class="w-16 h-16 p-2" src="{{ asset('images/'~(match.provider|lower)~'.svg') }}"
                                      alt=""/>
