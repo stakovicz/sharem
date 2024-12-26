@@ -18,7 +18,10 @@ class DeezerTest extends TestCase
         $this->deezer = new Deezer($this->httpClient);
     }
 
-    private function badURLs(): array
+    /**
+     * @return array<string, list<string>>
+     */
+    public function badURLs(): array
     {
         return [
             'empty' => [''],
@@ -37,7 +40,10 @@ class DeezerTest extends TestCase
         self::assertNull($actual);
     }
 
-    private function urls(): array
+    /**
+     * @return array<string, list<int|string>>
+     */
+    public function urls(): array
     {
         return [
             'deezer track URL' => ['https://www.deezer.com/us/track/69838319', 'track', 69838319],
