@@ -4,15 +4,21 @@
 
 {% block body %}
 
-    <div class="sticky top-0 flex-row items-center justify-center py-2 m-auto w-full max-w-[1024px] bg-white dark:bg-stone-800">
-        <h1 class="py-2 text-xl dark:text-stone-100">{{ block('title') }}</h1>
+    <div class="{{ cls(["sticky top-0 flex-row items-center justify-center",
+        "py-2 m-auto w-full max-w-[1024px] bg-white",
+        "dark:bg-stone-800"]) }}">
+        <h1 class="{{ cls(["py-2 text-xl dark:text-stone-100"]) }}">{{ block('title') }}</h1>
         {{ form_start(form) }}
             <div class="flex w-full my-2 rounded border-2 border-stone-900 dark:border-stone-400">
                 {{ form_label(form.query, null, {label_attr: {class: 'sr-only', }}) }}
                 {{ form_widget(form.query, {attr: {class: 'p-2 w-full', autofocus:true}}) }}
-                {{ form_widget(form.submit, {attr: {class: 'p-2 border-l-2 border-stone-900 text-sm leading-3 bg-stone-200 dark:border-stone-400 hover:opacity-70'}}) }}
+                {% set buttonCls = cls(['p-2 border-l-2 border-stone-900',
+                    'text-sm leading-3',
+                    'bg-stone-200',
+                    'dark:border-stone-400 hover:opacity-70']) %}
+                {{ form_widget(form.submit, {attr: {class: buttonCls}}) }}
                 <a title="{{ 'search.clear.title'|trans }}"
-                    class="p-2 border-l-2 border-stone-900 text-sm leading-3 bg-stone-200  dark:border-stone-400 hover:opacity-70"
+                    class="{{ buttonCls }}"
                     href="{{ path('app_home') }}"
                 >{{ ux_icon('mdi:clear', {class:"w-4 h-4 m-1"}) }}</a>
             </div>
